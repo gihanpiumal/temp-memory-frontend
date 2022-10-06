@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 
-function App() {
+import "./app.scss";
+
+import {
+  Login,
+  Home,
+  Registration,
+  EmailVerification,
+  ResetPassword,
+  ResetPasswordVerification,
+} from "./pages";
+import { RoutesConstant } from "./assets/constants";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="app-wrapper">
+        <Routes>
+          <Route path="*" element={<Navigate to={RoutesConstant.home} />} />
+          <Route path={RoutesConstant.home} element={<Home />} />
+          <Route path={RoutesConstant.login} element={<Login />} />
+          <Route
+            path={RoutesConstant.registration}
+            element={<Registration />}
+          />
+          <Route
+            path={RoutesConstant.emailVerification}
+            element={<EmailVerification />}
+          />
+          <Route
+            path={RoutesConstant.resetPassword}
+            element={<ResetPassword />}
+          />
+          <Route
+            path={RoutesConstant.resetPasswordVerification}
+            element={<ResetPasswordVerification />}
+          />
+        </Routes>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

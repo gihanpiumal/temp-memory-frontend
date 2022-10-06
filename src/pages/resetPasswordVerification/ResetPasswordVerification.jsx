@@ -15,14 +15,16 @@ import { RoutesConstant } from "../../assets/constants";
 import { getCurrentUser } from "../../config/LocalStorage";
 
 const ResetPasswordVerification = () => {
+  // states
   const [form, setForm] = useState({
-    _id: new URLSearchParams(window.location.search).get("id"),
+    _id: new URLSearchParams(window.location.search).get("id"), // get the id from url
     OTP: "",
     newPassword: "",
   });
   const [errors, setErrors] = useState([]);
   let navigate = useNavigate();
 
+  // schema for validation
   const schema = Joi.object({
     _id: Joi.string().required().label("ID"),
     OTP: Joi.string().required().label("OTP"),
@@ -38,6 +40,7 @@ const ResetPasswordVerification = () => {
       }),
   });
 
+  // submit validation
   const validate = () => {
     const option = {
       abortEarly: false,
@@ -57,6 +60,7 @@ const ResetPasswordVerification = () => {
     return errorData;
   };
 
+  // onclick validation
   const validateProperty = (name, value) => {
     const option = {
       abortEarly: false,
@@ -76,6 +80,7 @@ const ResetPasswordVerification = () => {
     }
   };
 
+  // clear the form
   const clearState = () => {
     setForm({
       OTP: "",
@@ -83,23 +88,22 @@ const ResetPasswordVerification = () => {
     });
   };
 
+  // submit the form
   const submit = async () => {
     if (validate()) {
-      console.log(form);
       return;
     }
-    console.log(form);
 
     try {
-      let data = await UserService.reset_password(form);
+      let data = await UserService.reset_password(form); // reset password endpoint
       if (data) {
         clearState();
         message.success("Password Reset Successfully", 3);
         navigate(RoutesConstant.login, {
+          // navigate to login page
           replace: true,
         });
-      }else{
-        
+      } else {
         message.error("Invalid OTP", 3);
       }
       return;

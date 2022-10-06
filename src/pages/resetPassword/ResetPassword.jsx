@@ -14,6 +14,7 @@ import { RoutesConstant } from "../../assets/constants";
 import { getCurrentUser } from "../../config/LocalStorage";
 
 const ResetPassword = () => {
+  //sates
   const [form, setForm] = useState({
     email: "",
   });
@@ -21,6 +22,7 @@ const ResetPassword = () => {
   const [errors, setErrors] = useState([]);
   let navigate = useNavigate();
 
+  //schema for validation
   const schema = Joi.object({
     email: Joi.string()
       .regex(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-z]+)$/)
@@ -28,6 +30,7 @@ const ResetPassword = () => {
       .required(),
   });
 
+  // form submit validation
   const validate = () => {
     const option = {
       abortEarly: false,
@@ -47,6 +50,7 @@ const ResetPassword = () => {
     return errorData;
   };
 
+  // onclick validation
   const validateProperty = (name, value) => {
     const option = {
       abortEarly: false,
@@ -66,24 +70,27 @@ const ResetPassword = () => {
     }
   };
 
+  // form clear
   const clearState = () => {
     setForm({
       email: "",
     });
   };
 
+  // form submit
   const submit = async () => {
     if (validate()) {
       return;
     }
-    let id = await getCurrentUser();
+    let id = await getCurrentUser(); //get curent token data
 
     try {
-      let data = await UserService.send_otp(form, id._id);
+      let data = await UserService.send_otp(form, id._id); // otp sending endpoint
       if (data) {
         clearState();
         console.log(id);
         navigate(
+          // navigate to reset password verification page
           RoutesConstant.resetPasswordVerification + "?id=" + id._id,
           {
             replace: true,

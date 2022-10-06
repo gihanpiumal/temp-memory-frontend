@@ -15,6 +15,8 @@ import { setAccessToken, removeAccessToken } from "../../config/LocalStorage";
 import { RoutesConstant } from "../../assets/constants";
 
 const Login = () => {
+  // stats of form and errors
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -39,6 +41,7 @@ const Login = () => {
       }),
   });
 
+  // validations of submit
   const validate = () => {
     const option = {
       abortEarly: false,
@@ -58,6 +61,7 @@ const Login = () => {
     return errorData;
   };
 
+  // valiation of onclicks
   const validateProperty = (name, value) => {
     const option = {
       abortEarly: false,
@@ -77,6 +81,7 @@ const Login = () => {
     }
   };
 
+  // set form clear
   const clearState = () => {
     setForm({
       email: "",
@@ -84,6 +89,8 @@ const Login = () => {
     });
   };
 
+
+  // submit the form
   const submit = async () => {
     if (validate()) {
       return;
@@ -91,11 +98,10 @@ const Login = () => {
     try {
       let data = await UserService.login(form);
       if (data) {
-        console.log(data);
         clearState();
         removeAccessToken();
-        setAccessToken(data.token);
-        navigate(RoutesConstant.home, {
+        setAccessToken(data.token);  // set new accesstoken
+        navigate(RoutesConstant.home, {  // navigate to home page
           replace: true,
         });
       }else{

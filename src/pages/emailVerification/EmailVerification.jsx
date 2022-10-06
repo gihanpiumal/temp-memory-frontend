@@ -13,6 +13,8 @@ import { RoutesConstant } from "../../assets/constants";
 import "./emailverification.scss";
 
 const EmailVerification = () => {
+  // stats of form and errors
+
   const [form, setForm] = useState({
     OTP: null,
   });
@@ -23,6 +25,7 @@ const EmailVerification = () => {
     OTP: Joi.number().optional().label("OTP"),
   });
 
+  // validations of submit
   const validate = () => {
     const option = {
       abortEarly: false,
@@ -42,6 +45,7 @@ const EmailVerification = () => {
     return errorData;
   };
 
+  // valiation of onclicks
   const validateProperty = (name, value) => {
     const option = {
       abortEarly: false,
@@ -61,23 +65,25 @@ const EmailVerification = () => {
     }
   };
 
+  // clear the form
   const clearState = () => {
     setForm({
       OTP: 0,
     });
   };
 
+  // form submiting
   const submit = async () => {
     if (validate()) {
       return;
     }
     try {
-      let id = new URLSearchParams(window.location.search).get("id");
+      let id = new URLSearchParams(window.location.search).get("id"); // get id from navigation bar
       let data = await UserService.email_verification(form, id);
       if (data) {
         clearState();
-        console.log(data.details);
         navigate(RoutesConstant.home, {
+          // navigate to home page
           replace: true,
         });
       }

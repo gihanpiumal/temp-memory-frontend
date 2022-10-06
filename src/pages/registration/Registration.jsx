@@ -13,6 +13,7 @@ import { RoutesConstant } from "../../assets/constants";
 import "./registration.scss";
 
 const Registration = () => {
+  // stats
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -27,6 +28,7 @@ const Registration = () => {
   const [errors, setErrors] = useState([]);
   let navigate = useNavigate();
 
+  // schema for validation
   const schema = Joi.object({
     firstName: Joi.string().required().label("First Name"),
     lastName: Joi.string().required().label("Last Name"),
@@ -56,6 +58,7 @@ const Registration = () => {
     OTPCode: Joi.number().optional().label("OTP"),
   });
 
+  // submit validation
   const validate = () => {
     const option = {
       abortEarly: false,
@@ -75,6 +78,7 @@ const Registration = () => {
     return errorData;
   };
 
+  // onclick validation
   const validateProperty = (name, value) => {
     const option = {
       abortEarly: false,
@@ -94,6 +98,7 @@ const Registration = () => {
     }
   };
 
+  // clear the form
   const clearState = () => {
     setForm({
       firstName: "",
@@ -104,27 +109,28 @@ const Registration = () => {
     });
   };
 
+  // submit the form
   const submit = async () => {
     if (validate()) {
       return;
     }
     try {
-      let data = await UserService.registration(form);
+      let data = await UserService.registration(form); // registration endpoint
       if (data) {
         clearState();
-        console.log(data.details._id);
         let sendOtpData = {
           email: data.details.email,
         };
         try {
           let otpSend = await UserService.send_otp(
+            // otp sending endpoint
             sendOtpData,
             data.details._id
           );
           if (otpSend) {
             console.log(data.details);
             navigate(
-              RoutesConstant.emailVerification + "?id=" + data.details._id,
+              RoutesConstant.emailVerification + "?id=" + data.details._id, // navigate to email verification page
               {
                 replace: true,
               }

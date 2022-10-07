@@ -1,0 +1,87 @@
+.user-profile {
+  .user-profile-wrapper {
+    display: flex;
+    padding: 2%;
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .user-profile-left {
+      position: fixed;
+      width: 30%;
+      height: 90%;
+      flex: 2;
+      margin-left: 3%;
+      margin-top: 2%;
+      @media screen and (max-width: 1000px) {
+        position: inherit;
+        margin-left: 0;
+        width: 100%;
+      }
+      .user-profile-left-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .user-profile-left-top-title {
+          font-size: 24px;
+          font-weight: bold;
+          margin-top: 2%;
+          margin-bottom: 3%;
+        }
+        .user-profile-left-top-avatar {
+          img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+          }
+        }
+      }
+      .user-profile-left-middle {
+        margin-top: 10%;
+        margin-left: 10%;
+        .user-profile-left-middle-details {
+          ul {
+            li {
+              list-style: none;
+              display: flex;
+              .profile-data-title {
+                flex: 2;
+                margin-right: 4%;
+                margin-bottom: 5%;
+                font-size: 18px;
+                font-weight: 700;
+              }
+              .profile-data-value {
+                font-size: 15px;
+                flex: 3;
+              }
+            }
+          }
+        }
+      }
+      .user-profile-left-bottom {
+        display: flex;
+        margin-left: 10%;
+        margin-bottom: 10%;
+        .user-profile-left-bottom-buttons {
+          margin-right: 30px;
+        }
+      }
+    }
+    .user-profile-right {
+      flex: 4;
+      margin-top: 2%;
+      margin-left: 35%;
+      @media screen and (max-width: 1000px) {
+        margin-left: 0;
+      }
+      .user-profile-right-top {
+        margin-left: 10%;
+        @media screen and (max-width: 1000px) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

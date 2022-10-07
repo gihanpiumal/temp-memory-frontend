@@ -10,6 +10,7 @@ import {
   EmailVerification,
   ResetPassword,
   ResetPasswordVerification,
+  UserProfile
 } from "./pages";
 import { RoutesConstant } from "./assets/constants";
 
@@ -36,6 +37,10 @@ const App = () => {
           <Route
             path={RoutesConstant.resetPasswordVerification}
             element={<ResetPasswordVerification />}
+          />
+          <Route
+            path={RoutesConstant.userProfile}
+            element={<UserProfile />}
           />
         </Routes>
       </div>

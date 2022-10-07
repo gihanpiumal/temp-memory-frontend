@@ -4,5 +4,6 @@ export default {
   registration: "/registration",
   emailVerification: "/email-verification",
   resetPassword: "/reset-password",
-  resetPasswordVerification: "/reset-password-verification"
+  resetPasswordVerification: "/reset-password-verification",
+  userProfile: "/profile"
 };

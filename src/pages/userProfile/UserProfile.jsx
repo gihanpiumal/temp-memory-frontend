@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Joi from "joi";
+import { useDispatch, useSelector } from "react-redux";
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -10,6 +11,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { message } from "antd";
 
 import { Post } from "../../components";
+import {getUsers} from "../../services/actions/userAction"
 
 import "./userprofile.scss";
 
@@ -24,6 +26,19 @@ const UserProfile = () => {
     Avatar: "",
     password: "",
   });
+
+  
+  const dispatch = useDispatch();
+  
+  let objUsers = {
+    firstName: "",
+  };
+  
+  useEffect(() => {
+    dispatch(getUsers(objUsers));
+  }, [dispatch]);
+
+  
 
   const temp_data = [
     {

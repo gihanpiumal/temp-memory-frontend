@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getAccessToken } from "../../config/LocalStorage";
+import { getCurrentUser } from "../../config/LocalStorage";
 
 const instance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
   responseType: "json",
   headers: {
     "Content-Type": "application/json",
@@ -14,6 +14,75 @@ const http = {
     let response;
     await instance({
       method: "POST",
+      url: url,
+      data: data,
+    })
+      .then((res) => {
+        response = res.data;
+      })
+      .catch(async (err) => {
+        response = { err };
+      });
+    return response;
+  },
+
+  getData: async function (url, parm) {
+    let response;
+    await instance({
+      method: "GET",
+      url: url,
+      params: parm,
+      headers: { "x-access-token": getCurrentUser() },
+    })
+      .then((res) => {
+        response = res.data;
+      })
+      .catch(async (err) => {
+        response = { err };
+      });
+    return response;
+  },
+
+  postData: async function (url, data) {
+    let response;
+    await instance({
+      method: "POST",
+      headers: { "x-access-token": getCurrentUser() },
+      url: url,
+      data: data,
+      // params: parm,
+    })
+      .then((res) => {
+        response = res.data;
+      })
+      .catch(async (err) => {
+        response = { err };
+      });
+    return response;
+  },
+
+  putData: async function (url, data) {
+    let response;
+    await instance({
+      method: "PUT",
+      headers: { "x-access-token": getCurrentUser() },
+      url: url,
+      data: data,
+    })
+      .then((res) => {
+        response = res.data;
+      })
+      .catch(async (err) => {
+        response = { err };
+      });
+    return response;
+  },
+
+  deleteData: async function (url, data) {
+    let response;
+    await instance({
+      method: "DELETE",
+      headers: { "x-access-token": getCurrentUser() },
       url: url,
       data: data,
     })

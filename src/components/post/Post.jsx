@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -19,6 +20,12 @@ const Post = ({ avatar_img, title, subheader, card_img, description }) => {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const users = useSelector((state) => state.USERS);
+
+  const showClick = () => {
+    console.log(users);
   };
   return (
     <div className="post">
@@ -51,11 +58,11 @@ const Post = ({ avatar_img, title, subheader, card_img, description }) => {
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-                {description}
+              {description}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
+            <IconButton onClick={showClick} aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
             <IconButton aria-label="share">

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCurrentUser } from "../../config/LocalStorage";
+import { getAccessToken } from "../../config/LocalStorage";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -32,7 +32,7 @@ const http = {
       method: "GET",
       url: url,
       params: parm,
-      headers: { "x-access-token": getCurrentUser() },
+      headers: { "x-access-token": getAccessToken() },
     })
       .then((res) => {
         response = res.data;
@@ -47,7 +47,7 @@ const http = {
     let response;
     await instance({
       method: "POST",
-      headers: { "x-access-token": getCurrentUser() },
+      headers: { "x-access-token": getAccessToken() },
       url: url,
       data: data,
       // params: parm,
@@ -65,7 +65,7 @@ const http = {
     let response;
     await instance({
       method: "PUT",
-      headers: { "x-access-token": getCurrentUser() },
+      headers: { "x-access-token": getAccessToken() },
       url: url,
       data: data,
     })
@@ -82,7 +82,7 @@ const http = {
     let response;
     await instance({
       method: "DELETE",
-      headers: { "x-access-token": getCurrentUser() },
+      headers: { "x-access-token": getAccessToken() },
       url: url,
       data: data,
     })

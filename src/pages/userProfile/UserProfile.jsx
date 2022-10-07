@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,8 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { message } from "antd";
 
 import { Post } from "../../components";
-import {getUsers} from "../../services/actions/userAction"
+import { getUsers } from "../../services/actions/userAction";
+import { getCurrentUser } from "../../config/LocalStorage";
 
 import "./userprofile.scss";
 
@@ -27,18 +28,38 @@ const UserProfile = () => {
     password: "",
   });
 
-  
   const dispatch = useDispatch();
-  
+
+  let curentTokenData = getCurrentUser(); // get email from token
   let objUsers = {
-    firstName: "",
+    email: curentTokenData.email,
   };
-  
+
   useEffect(() => {
-    dispatch(getUsers(objUsers));
+    dispatch(getUsers(objUsers)); // load user data to redux store
   }, [dispatch]);
 
-  
+  const data = useSelector((state) => state.USERS); // get current user details from redux store
+  let userdetails = [];
+  {
+    data.map((val) => {
+      userdetails = val;
+    });
+  }
+
+  // setForm(userdetails)  // set user data to form
+
+  const setEdit = () => {
+    setIsEdit(true);
+    setForm({
+      firstName: userdetails.firstName,
+      lastName: userdetails.lastName,
+      email: userdetails.email,
+      phone: userdetails.phone,
+      Avatar: userdetails.Avatar,
+      password: userdetails.password,
+    });
+  };
 
   const temp_data = [
     {
@@ -92,23 +113,109 @@ const UserProfile = () => {
               <ul>
                 <li>
                   <div className="profile-data-title">First Name :</div>
-                  <div className="profile-data-value">Gihan</div>
+
+                  <div className="profile-data-value">
+                    {isEdit ? (
+                      <TextField
+                        id="firstName"
+                        variant="standard"
+                        className="registration-text-input"
+                        value={form.firstName}
+                        // name={"firstName"}
+                        // error={errors.firstName ? true : false}
+                        // helperText={errors.firstName ? errors.firstName : ""}
+                        // onChange={(e) => {
+                        //   validateProperty("firstName", e);
+                        // }}
+                      />
+                    ) : (
+                      userdetails.firstName
+                    )}
+                  </div>
                 </li>
                 <li>
                   <div className="profile-data-title">Last Name :</div>
-                  <div className="profile-data-value">Piumal</div>
+                  <div className="profile-data-value">
+                    {isEdit ? (
+                      <TextField
+                        id="firstName"
+                        variant="standard"
+                        className="registration-text-input"
+                        value={form.lastName}
+                        // name={"firstName"}
+                        // error={errors.firstName ? true : false}
+                        // helperText={errors.firstName ? errors.firstName : ""}
+                        // onChange={(e) => {
+                        //   validateProperty("firstName", e);
+                        // }}
+                      />
+                    ) : (
+                      userdetails.lastName
+                    )}
+                  </div>
                 </li>
                 <li>
                   <div className="profile-data-title">Email :</div>
-                  <div className="profile-data-value">gihan@gmail.com</div>
+                  <div className="profile-data-value">
+                    {isEdit ? (
+                      <TextField
+                        id="firstName"
+                        variant="standard"
+                        className="registration-text-input"
+                        value={form.email}
+                        // name={"firstName"}
+                        // error={errors.firstName ? true : false}
+                        // helperText={errors.firstName ? errors.firstName : ""}
+                        // onChange={(e) => {
+                        //   validateProperty("firstName", e);
+                        // }}
+                      />
+                    ) : (
+                      userdetails.email
+                    )}
+                  </div>
                 </li>
                 <li>
                   <div className="profile-data-title">Phone :</div>
-                  <div className="profile-data-value">0776603689</div>
+                  <div className="profile-data-value">
+                    {isEdit ? (
+                      <TextField
+                        id="firstName"
+                        variant="standard"
+                        className="registration-text-input"
+                        value={form.phone}
+                        // name={"firstName"}
+                        // error={errors.firstName ? true : false}
+                        // helperText={errors.firstName ? errors.firstName : ""}
+                        // onChange={(e) => {
+                        //   validateProperty("firstName", e);
+                        // }}
+                      />
+                    ) : (
+                      userdetails.phone
+                    )}
+                  </div>
                 </li>
                 <li>
                   <div className="profile-data-title">Password :</div>
-                  <div className="profile-data-value">********</div>
+                  <div className="profile-data-value">
+                    {isEdit ? (
+                      <TextField
+                        id="firstName"
+                        variant="standard"
+                        className="registration-text-input"
+                        value={form.password}
+                        // name={"firstName"}
+                        // error={errors.firstName ? true : false}
+                        // helperText={errors.firstName ? errors.firstName : ""}
+                        // onChange={(e) => {
+                        //   validateProperty("firstName", e);
+                        // }}
+                      />
+                    ) : (
+                      "******"
+                    )}
+                  </div>
                 </li>
               </ul>
             </div>
@@ -118,9 +225,9 @@ const UserProfile = () => {
               <Button
                 variant="contained"
                 className="user-profile-edit-button"
-                // onClick={submit}
+                onClick={setEdit}
               >
-                Edit
+                {isEdit ? "Save" : "Edit"}
               </Button>
             </div>
             <div className="user-profile-left-bottom-buttons">

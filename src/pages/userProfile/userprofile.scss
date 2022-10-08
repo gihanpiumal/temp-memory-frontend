@@ -19,6 +19,15 @@
         margin-left: 0;
         width: 100%;
       }
+      .user-profile-left-modal {
+        .delete-confirmation-modal {
+          .delete-confirmation-modal-msg {
+            font-size: 32px;
+            margin-left: 50px;
+          }
+        }
+      }
+
       .user-profile-left-top {
         display: flex;
         flex-direction: column;
@@ -62,10 +71,30 @@
       }
       .user-profile-left-bottom {
         display: flex;
-        margin-left: 10%;
+        flex-direction: column;
+        margin-left: 5%;
         margin-bottom: 10%;
-        .user-profile-left-bottom-buttons {
-          margin-right: 30px;
+        .botton-upper-buttons {
+          margin-bottom: 3%;
+          display: flex;
+          justify-content: end;
+
+          .user-profile-left-bottom-buttons-edit {
+            margin-right: 10px;
+          }
+          .user-profile-left-bottom-buttons-cancle {
+            margin-right: 10px;
+          }
+        }
+        .bottom-buttons {
+          display: flex;
+          justify-content: space-between;
+          .user-profile-left-bottom-buttons-reset {
+            margin-right: 10px;
+          }
+          .user-profile-left-bottom-buttons-delete {
+            margin-right: 10px;
+          }
         }
       }
     }

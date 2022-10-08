@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment"
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -16,6 +17,11 @@ import {
   updateUser,
   deleteUser,
 } from "../../services/actions/userAction";
+import {
+  getPosts,
+  // updateUser,
+  // deleteUser,
+} from "../../services/actions/postAction";
 import { getCurrentUser } from "../../config/LocalStorage";
 import { RoutesConstant } from "../../assets/constants";
 
@@ -72,15 +78,30 @@ const UserProfile = () => {
     email: curentTokenData.email,
   };
 
+  let postObject = {
+    title: "",
+    creator_id: curentTokenData._id,
+    date: "",
+  };
+
   useEffect(() => {
     dispatch(getUsers(objUsers)); // load user data to redux store
+    dispatch(getPosts(postObject));
   }, [dispatch]);
 
-  const data = useSelector((state) => state.USERS); // get current user details from redux store
+  const dataUser = useSelector((state) => state.USERS); // get current user details from redux store
+  const dataPost = useSelector((state) => state.POSTS);
+
   let userdetails = [];
+  let userPostsdetails = [];
   {
-    data.map((val) => {
+    dataUser.map((val) => {
       userdetails = val;
+    });
+  }
+  {
+    dataPost.map((val) => {
+      userPostsdetails = val;
     });
   }
 
@@ -183,40 +204,6 @@ const UserProfile = () => {
     });
   };
 
-  const temp_data = [
-    {
-      avatar_img: "",
-      title: "Shrimp and Chorizo Paella",
-      subheader: "September 14, 2016",
-      card_img: "img1.jpg",
-      description:
-        "This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal",
-    },
-    {
-      avatar_img: "",
-      title: "Shrimp and Chorizo Paella",
-      subheader: "January 17, 2021",
-      card_img: "img2.avif",
-      description:
-        "This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal",
-    },
-    {
-      avatar_img: "",
-      title: "Shrimp and Chorizo Paella",
-      subheader: "January 17, 2021",
-      card_img: "img2.avif",
-      description:
-        "This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal",
-    },
-    {
-      avatar_img: "",
-      title: "Shrimp and Chorizo Paella",
-      subheader: "January 17, 2021",
-      card_img: "img2.avif",
-      description:
-        "This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal This impressive paella is a perfect party dish and a fun meal",
-    },
-  ];
   return (
     <div className="user-profile">
       <Box className="user-profile-wrapper">
@@ -418,13 +405,13 @@ const UserProfile = () => {
               spacing={{ xs: 2, md: 8 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              {temp_data.map((val, index) => (
+              {dataPost.map((val, index) => (
                 <Grid className="grids" xs={4} sm={4} md={6} key={index}>
                   <Post
-                    avatar_img={val.avatar_img}
+                    avatar_img={""}
                     title={val.title}
-                    subheader={val.subheader}
-                    card_img={val.card_img}
+                    subheader={val.date}
+                    card_img={"img1.jpg"}
                     description={val.description}
                   />
                 </Grid>

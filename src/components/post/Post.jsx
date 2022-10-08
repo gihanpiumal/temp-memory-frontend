@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import moment from "moment"
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -12,6 +13,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
+import { Dropdown, Menu, Space } from 'antd';
 
 import "./post.scss";
 
@@ -21,6 +23,28 @@ const Post = ({ avatar_img, title, subheader, card_img, description }) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: <a href="https://www.antgroup.com">1st menu item</a>,
+          key: '0',
+        },
+        {
+          label: <a href="https://www.aliyun.com">2nd menu item</a>,
+          key: '1',
+        },
+        {
+          type: 'divider',
+        },
+        {
+          label: '3rd menu item',
+          key: '3',
+        },
+      ]}
+    />
+  );
 
   const users = useSelector((state) => state.USERS);
 
@@ -47,7 +71,7 @@ const Post = ({ avatar_img, title, subheader, card_img, description }) => {
               </IconButton>
             }
             title={title}
-            subheader={subheader}
+            subheader={moment(subheader).format("YYYY-MM-DD")}
           />
 
           <CardMedia

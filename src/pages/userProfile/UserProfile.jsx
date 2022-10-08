@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment"
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -19,8 +18,6 @@ import {
 } from "../../services/actions/userAction";
 import {
   getPosts,
-  // updateUser,
-  // deleteUser,
 } from "../../services/actions/postAction";
 import { getCurrentUser } from "../../config/LocalStorage";
 import { RoutesConstant } from "../../assets/constants";
@@ -109,10 +106,6 @@ const UserProfile = () => {
 
   const showModal = () => {
     setDeleteIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setDeleteIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -270,6 +263,7 @@ const UserProfile = () => {
                         id="firstName"
                         variant="standard"
                         className="registration-text-input"
+                        label="First Name"
                         value={form.firstName}
                         name={"firstName"}
                         error={errors.firstName ? true : false}
@@ -291,6 +285,7 @@ const UserProfile = () => {
                         id="lastName"
                         variant="standard"
                         className="registration-text-input"
+                        label="Last Name"
                         value={form.lastName}
                         name={"lastName"}
                         error={errors.lastName ? true : false}
@@ -312,6 +307,7 @@ const UserProfile = () => {
                         id="email"
                         variant="standard"
                         className="registration-text-input"
+                        label="Email"
                         value={form.email}
                         name={"email"}
                         error={errors.email ? true : false}
@@ -333,6 +329,7 @@ const UserProfile = () => {
                         id="phone"
                         variant="standard"
                         className="registration-text-input"
+                        label="Phone"
                         value={form.phone}
                         name={"phone"}
                         error={errors.phone ? true : false}
@@ -413,6 +410,7 @@ const UserProfile = () => {
                     subheader={val.date}
                     card_img={"img1.jpg"}
                     description={val.description}
+                    postID={val._id}
                   />
                 </Grid>
               ))}

@@ -79,7 +79,6 @@ const http = {
   },
 
   deleteData: async function (url) {
-    console.log(url);
     let response;
     await instance({
       method: "DELETE",

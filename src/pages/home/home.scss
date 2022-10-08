@@ -1,0 +1,12 @@
+.home {
+  .home-wrapper {
+    display: flex;
+    // justify-content: center;
+    .home-sidenavbar {
+        flex: 1;
+    }
+    .home-contain {
+        flex: 5;
+    }
+  }
+}

@@ -71,6 +71,7 @@ const UserProfile = () => {
   let curentTokenData = getCurrentUser(); // get email from token
   let objUsers = {
     email: curentTokenData.email,
+    id: "",
   };
 
   let postObject = {
@@ -99,7 +100,6 @@ const UserProfile = () => {
       userPostsdetails = val;
     });
   }
-
 
   // modal controll functions
 
@@ -195,7 +195,7 @@ const UserProfile = () => {
       replace: true,
     });
   };
-  let avatar = ""
+  let avatar = "";
 
   return (
     <div className="user-profile">
@@ -246,10 +246,7 @@ const UserProfile = () => {
             <div className="user-profile-others">
               <div className="user-profile-left-top-title">My Profile</div>
               <div className="user-profile-left-top-avatar">
-                <img
-                  src={`${userdetails.Avatar}`}
-                  alt="profile image"
-                />
+                <img src={`${userdetails.Avatar}`} alt="profile image" />
               </div>
             </div>
           </div>
@@ -406,11 +403,11 @@ const UserProfile = () => {
             >
               {dataPost.map((val, index) => (
                 <Grid className="grids" xs={4} sm={4} md={6} key={index}>
-                {val.creator_details.map((value) => {
-                  {
-                    avatar=value.Avatar
-                  }
-                })}
+                  {val.creator_details.map((value) => {
+                    {
+                      avatar = value.Avatar;
+                    }
+                  })}
                   <Post
                     avatar_img={avatar}
                     title={val.title}

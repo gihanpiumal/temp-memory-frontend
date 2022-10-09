@@ -27,6 +27,18 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .file-input{
+          margin-top: 20px;
+          width: 350px;
+          @media screen and (max-width: 400px) {
+            width: 250px;
+          }
+          @media screen and (max-width: 300px) {
+            width: 150px;
+          }
+        }
+        
         .registration-text-input {
           width: 350px;
           @media screen and (max-width: 400px) {

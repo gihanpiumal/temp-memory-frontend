@@ -105,7 +105,6 @@ const SideNavBar = () => {
     if (validate()) {
       return;
     }
-    console.log(form);
     let data = await dispatch(addPost(form)); // save new post data
     if (data) {
       message.success("Post added successfullly", 3);
@@ -162,7 +161,7 @@ const SideNavBar = () => {
               }}
             /> */}
 
-            <div className="image-input">
+            <div className="image-input" style={{ marginTop: 20 }}>
               <FileBase
                 type="file"
                 multiple={false}

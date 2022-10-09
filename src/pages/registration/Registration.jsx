@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Spin } from 'antd';
 
 import { UserService } from "../../services";
 import { RoutesConstant } from "../../assets/constants";
@@ -27,6 +28,7 @@ const Registration = () => {
   });
 
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
   let navigate = useNavigate();
 
   // schema for validation
@@ -123,6 +125,7 @@ const Registration = () => {
           email: data.details.email,
         };
         try {
+          setIsLoading(true)
           let otpSend = await UserService.send_otp(
             // otp sending endpoint
             sendOtpData,
@@ -130,6 +133,7 @@ const Registration = () => {
           );
           if (otpSend) {
             console.log(data.details);
+            setIsLoading(false)
             navigate(
               RoutesConstant.emailVerification + "?id=" + data.details._id, // navigate to email verification page
               {
@@ -138,6 +142,7 @@ const Registration = () => {
             );
           }
         } catch (error) {
+          setIsLoading(false)
           console.log(error);
           return;
         }
@@ -151,6 +156,7 @@ const Registration = () => {
   return (
     <div className="registration">
       <Box className="registration-wrapper">
+        {isLoading && <Spin size="large" />}
         <Paper className="registration-details">
           <div className="registration-title">Registration</div>
           <div className="registration-inputs">

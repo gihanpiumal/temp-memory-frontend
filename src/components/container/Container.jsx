@@ -12,6 +12,7 @@ import { Post } from "../../components";
 import { getPosts } from "../../services/actions/postAction";
 
 import "./container.scss";
+import { message } from "antd";
 
 const Container = () => {
   const [form, setForm] = useState({
@@ -30,12 +31,12 @@ const Container = () => {
 
   // get current user details from redux store
   const dataPost = useSelector((state) => state.POSTS);
-  let avatar = ""
 
   return (
     <div className="container">
       <Box className="container-wrapper">
         <div className="container-top">
+          {dataPost=="" && <div className="empty-message">No memories available</div>}
           <Grid
             className="grid"
             container
@@ -43,14 +44,10 @@ const Container = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {dataPost.map((val, index) => (
-              <Grid className="grids" xs={4} sm={4} md={4} key={index}>
-                {val.creator_details.map((value) => {
-                  {
-                    avatar=value.Avatar
-                  }
-                })}
+              <Grid className="grids" xs={4} sm={4} md={6} key={index}>
+                
                 <Post
-                  avatar_img={avatar}
+                  avatar_img={val.creator_id}
                   title={val.title}
                   subheader={val.date}
                   card_img={val.image}

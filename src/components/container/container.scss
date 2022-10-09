@@ -1,9 +1,18 @@
-.container{
-    .container-wrapper{
-        // height: 100vh;
-        
-        .container-top{
-
-        }
+.container {
+  .container-wrapper {
+    height: 100vh;
+    @media screen and (max-height: 1000px) {
+      height: auto;
     }
+    .empty-message {
+      font-size: 25px;
+      font-weight: 600;
+      color: #333C83;
+      // margin-left: 100%;
+      // margin-top: 100%;
+    }
+
+    .container-top {
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Joi from "joi";
 import moment from "moment";
@@ -22,6 +22,7 @@ import { Dropdown, Menu, message, Modal } from "antd";
 
 import "./post.scss";
 import { deletePost, updatePost } from "../../services/actions/postAction";
+import { getUsers } from "../../services/actions/userAction";
 import { getCurrentUser } from "../../config/LocalStorage";
 import { RoutesConstant } from "../../assets/constants";
 
@@ -51,6 +52,24 @@ const Post = ({
 
   const dispatch = useDispatch();
 
+  let objUsers = {
+    email: "",
+    id: avatar_img,
+  };
+
+  useEffect(() => {
+    // load post data to redux store
+    dispatch(getUsers(objUsers));
+  }, [dispatch]);
+
+  const dataUser = useSelector((state) => state.USERS); // get current user details from redux store
+
+  let userdetails = [];
+  {
+    dataUser.map((val) => {
+      userdetails = val;
+    });
+  }
   let curentTokenData = getCurrentUser(); // get id from token
   const userID = curentTokenData._id;
 
@@ -283,11 +302,7 @@ const Post = ({
           <CardHeader
             avatar={
               <Avatar aria-label="recipe">
-                <img className="dp"
-                  src={`${avatar_img}`}
-                  alt="profile image"
-                />
-                
+                <img className="dp" src={`${userdetails.Avatar}`} alt="profile image" />
               </Avatar>
             }
             action={

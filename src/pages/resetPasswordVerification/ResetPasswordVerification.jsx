@@ -22,7 +22,7 @@ const ResetPasswordVerification = () => {
     newPassword: "",
   });
   const [errors, setErrors] = useState([]);
-  let navigate = useNavigate();
+  let navigate = useNavigate(); // use to navigate between links
 
   // schema for validation
   const schema = Joi.object({

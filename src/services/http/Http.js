@@ -78,13 +78,12 @@ const http = {
     return response;
   },
 
-  deleteData: async function (url, data) {
+  deleteData: async function (url) {
     let response;
     await instance({
       method: "DELETE",
       headers: { "x-access-token": getAccessToken() },
       url: url,
-      data: data,
     })
       .then((res) => {
         response = res.data;

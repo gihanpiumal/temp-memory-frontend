@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Joi from "joi";
+import FileBase from "react-file-base64";
 
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -218,6 +219,13 @@ const Registration = () => {
                 validateProperty("password", e);
               }}
             />
+            <div className="file-input">
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) => setForm({ ...form, Avatar: base64 })}
+              />
+            </div>
           </div>
           <div className="registration-buttons">
             <div className="registration-buttons-bottom">

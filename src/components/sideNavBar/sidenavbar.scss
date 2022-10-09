@@ -1,7 +1,7 @@
 .side-nav-bar {
   .side-nav-bar-wrapper {
     // margin-left: 3%;
-    background-color: rgb(114, 114, 114);
+    background-color: #B4FF9F;
     height: 100vh;
     @media screen and (max-width: 1200px) {
       width: 50%;
@@ -16,16 +16,16 @@
       .side-nav-bar-title {
         font-size: 28px;
         font-weight: bold;
-        color: #fff;
+        color: #AB46D2;
       }
       .side-nav-bar-logo {
         margin-top: 20px;
         .logo-icoon {
           padding: 5px;
           font-size: 88px;
-          background-color: #fecd70;
+          background-color: #AB46D2;
           border-radius: 50%;
-          color: #2b7a0b;
+          color: #F9D923;
         }
       }
     }
@@ -39,9 +39,16 @@
         font-size: 20px;
         font-weight: 500;
         cursor: pointer;
+        .link-icon{
+          color: #333C83;
+        }
+        p{
+          
+        color: #333C83;
+        }
 
         :hover {
-          color: #fff;
+          color: #EB5353;
         }
         .side-nav-links {
           display: flex;
@@ -65,7 +72,7 @@
         .side-nav-links {
           display: flex;
           justify-content: center;
-          color: #000;
+          color: #C70A80;
           .link-icon {
             font-size: 30px;
             margin-right: 10px;

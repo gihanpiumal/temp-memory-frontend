@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Joi from "joi";
 import moment from "moment";
+import FileBase from "react-file-base64";
 
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AddBoxIcon from "@mui/icons-material/AddBox";
@@ -104,6 +105,7 @@ const SideNavBar = () => {
     if (validate()) {
       return;
     }
+    console.log(form);
     let data = await dispatch(addPost(form)); // save new post data
     if (data) {
       message.success("Post added successfullly", 3);
@@ -146,7 +148,7 @@ const SideNavBar = () => {
                 validateProperty("title", e);
               }}
             />
-            <TextField
+            {/* <TextField
               id="image"
               variant="standard"
               className="registration-text-input"
@@ -158,7 +160,16 @@ const SideNavBar = () => {
               onChange={(e) => {
                 validateProperty("image", e);
               }}
-            />
+            /> */}
+
+            <div className="image-input">
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) => setForm({ ...form, image: base64 })}
+              />
+            </div>
+
             <TextField
               id="description"
               variant="standard"

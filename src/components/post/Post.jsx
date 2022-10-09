@@ -279,15 +279,15 @@ const Post = ({
             </Button>
           </div>
         </Modal>
-        <Card sx={{ maxWidth: 400 }}>
+        <Card style={{ backgroundColor: "#fff" }} sx={{ maxWidth: 400 }}>
           <CardHeader
             avatar={
               <Avatar aria-label="recipe">
-                {/* <img
-                  src={require(`../../images/dp-new.jpeg`)}
+                <img className="dp"
+                  src={`${avatar_img}`}
                   alt="profile image"
-                /> */}
-                G
+                />
+                
               </Avatar>
             }
             action={
@@ -306,21 +306,22 @@ const Post = ({
           />
 
           <CardMedia
+            style={{ backgroundColor: "#fff", padding: 5 }}
             component="img"
             height="194"
-            image={require(`../../images/${card_img}`)}
+            image={card_img}
             alt="Paella dish"
           />
-          <CardContent>
+          <CardContent style={{ backgroundColor: "#fff" }}>
             <Typography variant="body2" color="text.secondary">
               {description}
             </Typography>
           </CardContent>
-          <CardActions disableSpacing>
-            {/* <IconButton aria-label="add to favorites">
+          {/* <CardActions disableSpacing> */}
+          {/* <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton> */}
-          </CardActions>
+          {/* </CardActions> */}
         </Card>
       </div>
     </div>

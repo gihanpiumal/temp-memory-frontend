@@ -30,6 +30,7 @@ const Container = () => {
 
   // get current user details from redux store
   const dataPost = useSelector((state) => state.POSTS);
+  let avatar = ""
 
   return (
     <div className="container">
@@ -43,11 +44,16 @@ const Container = () => {
           >
             {dataPost.map((val, index) => (
               <Grid className="grids" xs={4} sm={4} md={4} key={index}>
+                {val.creator_details.map((value) => {
+                  {
+                    avatar=value.Avatar
+                  }
+                })}
                 <Post
-                  avatar_img={""}
+                  avatar_img={avatar}
                   title={val.title}
                   subheader={val.date}
-                  card_img={"img1.jpg"}
+                  card_img={val.image}
                   description={val.description}
                   postID={val._id}
                   creatorID={val.creator_id}

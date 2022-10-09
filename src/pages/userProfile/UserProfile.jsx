@@ -100,6 +100,7 @@ const UserProfile = () => {
     });
   }
 
+
   // modal controll functions
 
   const showModal = () => {
@@ -194,6 +195,7 @@ const UserProfile = () => {
       replace: true,
     });
   };
+  let avatar = ""
 
   return (
     <div className="user-profile">
@@ -245,7 +247,7 @@ const UserProfile = () => {
               <div className="user-profile-left-top-title">My Profile</div>
               <div className="user-profile-left-top-avatar">
                 <img
-                  src={require(`../../images/dp-new.jpeg`)}
+                  src={`${userdetails.Avatar}`}
                   alt="profile image"
                 />
               </div>
@@ -404,11 +406,16 @@ const UserProfile = () => {
             >
               {dataPost.map((val, index) => (
                 <Grid className="grids" xs={4} sm={4} md={6} key={index}>
+                {val.creator_details.map((value) => {
+                  {
+                    avatar=value.Avatar
+                  }
+                })}
                   <Post
-                    avatar_img={""}
+                    avatar_img={avatar}
                     title={val.title}
                     subheader={val.date}
-                    card_img={"img1.jpg"}
+                    card_img={val.image}
                     description={val.description}
                     postID={val._id}
                     creatorID={userdetails._id}

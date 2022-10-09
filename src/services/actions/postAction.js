@@ -13,14 +13,15 @@ export const getPosts = (obj) => async (dispatch) => {
   }
 };
 
-//   export const addUser = (obj) => async (dispatch) => {
-//     try {
-//       const { data } = await api.postData("/user/new/add", obj);
-//       dispatch({ type: actionTypes.add_user, payload: data.addedData });
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
+  export const addPost = (obj) => async (dispatch) => {
+    try {
+      const { data } = await httpCollection.postData(subURL + "new/add", obj);
+      dispatch({ type: actionTypes.add_post, payload: data.details });
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
 export const updatePost = (id, obj) => async (dispatch) => {
   try {

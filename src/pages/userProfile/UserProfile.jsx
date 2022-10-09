@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Unstable_Grid2";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { message, Modal } from "antd";
 
 import { Post } from "../../components";
@@ -16,14 +17,11 @@ import {
   updateUser,
   deleteUser,
 } from "../../services/actions/userAction";
-import {
-  getPosts,
-} from "../../services/actions/postAction";
+import { getPosts } from "../../services/actions/postAction";
 import { getCurrentUser } from "../../config/LocalStorage";
 import { RoutesConstant } from "../../assets/constants";
 
 import "./userprofile.scss";
-import { createFilterOptions } from "@mui/material";
 
 const UserProfile = () => {
   // schema for validation
@@ -243,12 +241,14 @@ const UserProfile = () => {
             </Modal>
           </div>
           <div className="user-profile-left-top">
-            <div className="user-profile-left-top-title">My Profile</div>
-            <div className="user-profile-left-top-avatar">
-              <img
-                src={require(`../../images/dp-new.jpeg`)}
-                alt="profile image"
-              />
+            <div className="user-profile-others">
+              <div className="user-profile-left-top-title">My Profile</div>
+              <div className="user-profile-left-top-avatar">
+                <img
+                  src={require(`../../images/dp-new.jpeg`)}
+                  alt="profile image"
+                />
+              </div>
             </div>
           </div>
           <div className="user-profile-left-middle">
@@ -411,6 +411,7 @@ const UserProfile = () => {
                     card_img={"img1.jpg"}
                     description={val.description}
                     postID={val._id}
+                    creatorID={userdetails._id}
                   />
                 </Grid>
               ))}

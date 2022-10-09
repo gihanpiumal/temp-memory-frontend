@@ -1,12 +1,41 @@
 .home {
   .home-wrapper {
     display: flex;
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
     // justify-content: center;
+
+    .span-box {
+      // float: right;
+      margin-left: 90%;
+      position: fixed;
+      display: none;
+      .span-icon {
+        font-size: 56px;
+        color: black;
+      }
+      @media screen and (max-width: 1200px) {
+        display: block;
+      }
+    }
+
     .home-sidenavbar {
-        flex: 1;
+      position: fixed;
+      width: 20%;
+      height: 50%;
+      @media screen and (max-width: 1200px) {
+        display: none;
+      }
+    }
+    .home-sidenavbar.show {
+      display: block;
     }
     .home-contain {
-        flex: 5;
+      margin-top: 2%;
+      margin-left: 30%;
+      @media screen and (max-width: 1000px) {
+        margin-left: 0;
+      }
     }
   }
 }

@@ -1,8 +1,13 @@
 .side-nav-bar {
   .side-nav-bar-wrapper {
-    margin-left: 3%;
+    // margin-left: 3%;
     background-color: rgb(114, 114, 114);
     height: 100vh;
+    @media screen and (max-width: 1200px) {
+      width: 50%;
+      z-index: 6;
+      position: fixed;
+    }
     .side-nav-bar-top {
       padding-top: 10%;
       display: flex;
@@ -39,9 +44,9 @@
           color: #fff;
         }
         .side-nav-links {
-            display: flex;
-            justify-content: center;
-            color: #000;
+          display: flex;
+          justify-content: center;
+          color: #000;
           .link-icon {
             font-size: 30px;
             margin-right: 10px;
@@ -50,16 +55,21 @@
       }
     }
     .side-nav-bar-bottom {
-      margin-top: 120%;
+      margin-top: 100%;
       .side-nav-bar-logout {
         display: flex;
         margin-left: 25%;
         font-size: 18px;
         font-weight: 600;
         cursor: pointer;
-        .link-icon {
-          font-size: 30px;
-          margin-right: 10px;
+        .side-nav-links {
+          display: flex;
+          justify-content: center;
+          color: #000;
+          .link-icon {
+            font-size: 30px;
+            margin-right: 10px;
+          }
         }
       }
     }

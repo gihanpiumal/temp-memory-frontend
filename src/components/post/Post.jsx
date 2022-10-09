@@ -32,6 +32,7 @@ const Post = ({
   card_img,
   description,
   postID,
+  creatorID,
 }) => {
   // schema for validation
   const schema = Joi.object({
@@ -50,7 +51,8 @@ const Post = ({
 
   const dispatch = useDispatch();
 
-  //let curentTokenData = getCurrentUser(); // get id from token
+  let curentTokenData = getCurrentUser(); // get id from token
+  const userID = curentTokenData._id;
 
   const showEditModal = () => {
     setEditModal(true);
@@ -110,6 +112,9 @@ const Post = ({
   };
 
   const handleEdit = async () => {
+    if (validate()) {
+      return;
+    }
     let data = await dispatch(updatePost(postID, form)); // save edited data
     if (data) {
       message.success("Post edit successfullly", 3);
@@ -128,6 +133,7 @@ const Post = ({
   const handleCancel = () => {
     setdeleteModal(false);
     setEditModal(false);
+    setErrors([]);
   };
 
   const menu = (
@@ -252,7 +258,7 @@ const Post = ({
               display: "flex",
               justifyContent: "end",
               marginRight: 20,
-              marginTop: 20
+              marginTop: 20,
             }}
           >
             <Button
@@ -286,11 +292,13 @@ const Post = ({
             }
             action={
               <IconButton aria-label="settings">
-                <Dropdown overlay={menu} trigger={["click"]}>
-                  <a onClick={(e) => e.preventDefault()}>
-                    <MoreVertIcon style={{ color: "black" }} />
-                  </a>
-                </Dropdown>
+                {userID == creatorID && (
+                  <Dropdown overlay={menu} trigger={["click"]}>
+                    <a onClick={(e) => e.preventDefault()}>
+                      <MoreVertIcon style={{ color: "black" }} />
+                    </a>
+                  </Dropdown>
+                )}
               </IconButton>
             }
             title={title}
@@ -309,12 +317,9 @@ const Post = ({
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
+            {/* <IconButton aria-label="add to favorites">
               <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
+            </IconButton> */}
           </CardActions>
         </Card>
       </div>

@@ -30,19 +30,25 @@
 
       .user-profile-left-top {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        .user-profile-left-top-title {
-          font-size: 24px;
-          font-weight: bold;
-          margin-top: 2%;
-          margin-bottom: 3%;
-        }
-        .user-profile-left-top-avatar {
-          img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
+        justify-content: space-around;
+        // flex-direction: column;
+        // align-items: center;
+        .user-profile-others {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .user-profile-left-top-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 2%;
+            margin-bottom: 3%;
+          }
+          .user-profile-left-top-avatar {
+            img {
+              width: 200px;
+              height: 200px;
+              border-radius: 50%;
+            }
           }
         }
       }

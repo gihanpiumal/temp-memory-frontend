@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/temp-memory-frontend/tree/office-new-memory-frotend/static/css/main.c59a4847.css",
+    "main.js": "/temp-memory-frontend/tree/office-new-memory-frotend/static/js/main.be590425.js",
+    "index.html": "/temp-memory-frontend/tree/office-new-memory-frotend/index.html",
+    "main.c59a4847.css.map": "/temp-memory-frontend/tree/office-new-memory-frotend/static/css/main.c59a4847.css.map",
+    "main.be590425.js.map": "/temp-memory-frontend/tree/office-new-memory-frotend/static/js/main.be590425.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c59a4847.css",
+    "static/js/main.be590425.js"
+  ]
+}

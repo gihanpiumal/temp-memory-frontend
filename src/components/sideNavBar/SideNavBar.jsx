@@ -111,6 +111,14 @@ const SideNavBar = () => {
     }
     setShowAddModal(false);
     setErrors([]);
+    setForm({
+      creator_id: curentTokenData._id,
+      date: moment().format("YYYY-MM-DD"),
+      title: "",
+      image: "",
+      description: "",
+      likeCount: 0,
+    });
   };
 
   return (

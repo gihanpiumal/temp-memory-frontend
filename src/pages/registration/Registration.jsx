@@ -7,7 +7,9 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Spin } from 'antd';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Spin } from "antd";
 
 import { UserService } from "../../services";
 import { RoutesConstant } from "../../assets/constants";
@@ -28,7 +30,8 @@ const Registration = () => {
   });
 
   const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [password, setPassword] = useState("password");
+  const [isLoading, setIsLoading] = useState(false);
   let navigate = useNavigate();
 
   // schema for validation
@@ -125,7 +128,7 @@ const Registration = () => {
           email: data.details.email,
         };
         try {
-          setIsLoading(true)
+          setIsLoading(true);
           let otpSend = await UserService.send_otp(
             // otp sending endpoint
             sendOtpData,
@@ -133,7 +136,7 @@ const Registration = () => {
           );
           if (otpSend) {
             console.log(data.details);
-            setIsLoading(false)
+            setIsLoading(false);
             navigate(
               RoutesConstant.emailVerification + "?id=" + data.details._id, // navigate to email verification page
               {
@@ -142,7 +145,7 @@ const Registration = () => {
             );
           }
         } catch (error) {
-          setIsLoading(false)
+          setIsLoading(false);
           console.log(error);
           return;
         }
@@ -153,6 +156,16 @@ const Registration = () => {
       return;
     }
   };
+
+  // show to don't show the password
+  const changePassword = () => {
+    if (password === "password") {
+      setPassword("");
+    } else {
+      setPassword("password");
+    }
+  };
+
   return (
     <div className="registration">
       <Box className="registration-wrapper">
@@ -212,19 +225,27 @@ const Registration = () => {
                 validateProperty("phone", e);
               }}
             />
-            <TextField
-              id="password"
-              label="Password"
-              variant="standard"
-              className="registration-text-input"
-              value={form.password}
-              name={"password"}
-              error={errors.password ? true : false}
-              helperText={errors.password ? errors.password : ""}
-              onChange={(e) => {
-                validateProperty("password", e);
-              }}
-            />
+            <div className="password-claass">
+              <TextField
+                id="password"
+                label="Password"
+                type={password}
+                variant="standard"
+                className="registration-text-input-password-claass"
+                value={form.password}
+                name={"password"}
+                error={errors.password ? true : false}
+                helperText={errors.password ? errors.password : ""}
+                onChange={(e) => {
+                  validateProperty("password", e);
+                }}
+              />
+              {password ? (
+                <VisibilityIcon onClick={changePassword} />
+              ) : (
+                <VisibilityOffIcon onClick={changePassword} />
+              )}
+            </div>
             <div className="file-input">
               <FileBase
                 type="file"

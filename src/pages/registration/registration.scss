@@ -38,6 +38,11 @@
             width: 150px;
           }
         }
+
+        .password-claass{
+          display: flex;
+          align-items: center;
+        }
         
         .registration-text-input {
           width: 350px;
@@ -46,6 +51,16 @@
           }
           @media screen and (max-width: 300px) {
             width: 150px;
+          }
+        }
+
+        .registration-text-input-password-claass{
+          width: 325px;
+          @media screen and (max-width: 400px) {
+            width: 225px;
+          }
+          @media screen and (max-width: 300px) {
+            width: 125px;
           }
         }
       }
